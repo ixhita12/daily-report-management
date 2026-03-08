@@ -188,13 +188,13 @@ def edit_report(id):
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
 
-    # Pehle report fetch karo
+    #  report fetch 
     cursor.execute("SELECT * FROM reports WHERE id = %s", (id,))
     report = cursor.fetchone()
     if not report:
       return redirect('/view-reports')
 
-    # 🔐 SECURITY CHECK
+    #  SECURITY CHECK
     if session.get('role') == 'student':
         if report['email'] != session.get('email'):
             return redirect('/dashboard')
@@ -202,7 +202,7 @@ def edit_report(id):
         if report['status'] == 'Approved':
             return redirect('/dashboard')
 
-    # Agar POST hai to update logic
+    # update logic
     if request.method == 'POST':
         new_work = request.form['work']
         new_hours = request.form['hours']
@@ -227,11 +227,11 @@ def delete_report(id):
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
 
-    # Report check karo
+    # Report check 
     cursor.execute("SELECT * FROM reports WHERE id = %s", (id,))
     report = cursor.fetchone()
 
-    # Agar student hai aur email match nahi karta → block
+    #  student hai and email match nahi karta → block
     if session.get('role') == 'student':
 
      if report['email'] != session.get('email'):
