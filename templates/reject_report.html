@@ -1,0 +1,32 @@
+@app.route('/reject/<int:id>', methods=['GET', 'POST'])
+def reject_report(id):
+
+    if session.get('role') != 'admin':
+        return redirect('/')
+
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    # Report fetch karo
+    cursor.execute("SELECT * FROM reports WHERE id = %s", (id,))
+    report = cursor.fetchone()
+
+    if not report:
+        return redirect('/view-reports')
+
+    if request.method == 'POST':
+        comment = request.form['comment']
+
+        cursor.execute("""
+            UPDATE reports
+            SET status = 'Rejected', review_comment = %s
+            WHERE id = %s
+        """, (comment, id))
+
+        conn.commit()
+        cursor.close()
+        conn.close()
+
+        return redirect('/view-reports')
+
+    return render_template("reject_report.html", report=report)

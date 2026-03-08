@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <title>{{ title }}</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color:rgb(201, 241, 218);
+        }
+        .sidebar {
+            height: 100vh;
+            background:rgb(15, 59, 82);
+            color: white;
+        }
+        .sidebar a {
+            color: rgb(245, 249, 253);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px;
+            border-radius: 8px;
+            font-weight: 500;
+            letter-spacing: 0.4px;
+            font-size: 15px;
+            transition: all 0.2s ease;
+    }
+
+        .sidebar a:hover {
+            background: #334155;
+            transform: translateX(4px);
+   }
+
+        .sidebar a:hover {
+            background: #334155;
+            color: white;
+        }
+
+        .sidebar a.active {
+    background: rgba(255, 255, 255, 0.15);
+    font-weight: 600;
+    box-shadow: inset 3px 0 0 white;
+}
+.active-link {
+    background:rgb(75, 86, 107);
+    font-weight: 600;
+}
+
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-dark bg-dark px-4">
+    <span class="navbar-brand">Daily Report Portal</span>
+
+    {% if session.get('email') %}
+    <div class="text-light">
+        {{ session['email'] }}
+        <a href="/logout" class="btn btn-sm btn-outline-light ms-3">Logout</a>
+    </div>
+    {% endif %}
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+
+        {% if session.get('role') %}
+
+        
+        
+<!-- SIDEBAR -->
+        <div class="col-md-2 sidebar p-3">
+
+            {% if session['role'] == 'student' %}
+<a href="/dashboard"
+   class="{% if request.path == '/dashboard' %}active{% endif %}">
+   Dashboard
+</a>
+
+<a href="/submit-report"
+   class="{% if request.path == '/submit-report' %}active{% endif %}">
+   Submit Report
+</a>
+
+<a href="/view-reports"
+   class="{% if request.path.startswith('/view-reports') %}active{% endif %}">
+   My Reports
+</a>
+            {% elif session['role'] == 'admin' %}
+<a href="/admin-dashboard"
+   class="{% if request.path == '/admin-dashboard' %}active{% endif %}">
+    <i class="bi bi-grid-1x2"></i>
+    Admin Dashboard
+</a>
+
+<a href="/view-reports"
+   class="{% if request.path.startswith('/view-reports') %}active{% endif %}">
+    <i class="bi bi-gear"></i>
+    Manage Reports
+</a>
+
+            {% endif %}
+
+        </div>
+        {% endif %}
+
+        <!-- MAIN CONTENT -->
+        <div class="col-md-10 p-4">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

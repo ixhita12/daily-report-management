@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+
+        <div class="card shadow border-0 rounded-3">
+            <div class="card-body p-4">
+
+                <h4 class="fw-bold mb-4">
+                    Edit Report
+                </h4>
+
+                <form method="POST">
+
+                    <!-- Date -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">
+                            Date
+                        </label>
+                        <input type="date"
+                               name="date"
+                               value="{{ report.report_date }}"
+                               required
+                               class="form-control shadow-sm">
+                    </div>
+
+                    <!-- Work -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">
+                            Work Done
+                        </label>
+                        <textarea name="work"
+                                  rows="4"
+                                  required
+                                  class="form-control shadow-sm"
+                                  placeholder="Update your work details">{{ report.work_done }}</textarea>
+                    </div>
+
+                    <!-- Hours -->
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">
+                            Hours
+                        </label>
+                        <input type="number"
+                               name="hours"
+                               min="1"
+                               max="24"
+                               value="{{ report.hours }}"
+                               required
+                               class="form-control shadow-sm">
+                    </div>
+
+                    <div class="d-grid gap-2">
+
+                        <button type="submit"
+                                class="btn btn-primary fw-semibold py-2 shadow-sm">
+                            Update Report
+                        </button>
+
+                        <a href="/view-reports"
+                           class="btn btn-outline-secondary fw-semibold py-2">
+                            Cancel
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

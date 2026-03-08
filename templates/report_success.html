@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+
+        <div class="card border-0 shadow-lg rounded-4">
+            <div class="card-body text-center p-5">
+
+                <!-- Success Circle -->
+                <div class="mx-auto mb-4 d-flex align-items-center justify-content-center"
+                     style="width:80px;height:80px;border-radius:50%;background:#e6f9f0;">
+                    <span style="font-size:32px;color:#198754;">✓</span>
+                </div>
+
+                <!-- Heading -->
+                <h3 class="fw-bold mb-2">
+                    Report Submitted
+                </h3>
+
+                <!-- Subtext -->
+                <p class="text-muted mb-4">
+                    Your report has been successfully submitted and is now awaiting admin review.
+                </p>
+
+                <!-- Divider -->
+                <hr class="my-4">
+
+                <!-- Action Buttons -->
+                <div class="d-grid gap-3">
+
+                    <a href="/view-reports"
+                       class="btn btn-primary fw-semibold py-2">
+                        View My Reports
+                    </a>
+
+                    <a href="/dashboard"
+                       class="btn btn-outline-secondary fw-semibold py-2">
+                        Back to Dashboard
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

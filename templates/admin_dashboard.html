@@ -1,0 +1,39 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3 class="mb-4">Admin Dashboard Overview</h3>
+
+<div class="row g-4">
+
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h6>Total Reports</h6>
+                <h3>{{ total_reports }}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h6>Today's Reports</h6>
+                <h3>{{ today_reports }}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h6>Total Active Students</h6>
+                <h3>{{ total_students }}</h3>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
